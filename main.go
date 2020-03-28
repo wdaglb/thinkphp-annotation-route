@@ -5,6 +5,7 @@ import (
 )
 
 func main() {
+	println("version: 1.0.0")
 	//flag.PrintDefaults()
 
 	ke.Write(ke.GetConfig("route_file"))
