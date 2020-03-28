@@ -13,3 +13,11 @@ kroute --watch
 # 解析路由
 kroute
 ```
+
+## 源代码编译
+
+```
+CGO_ENABLED=0;GOOS=linux
+
+CGO_ENABLED=0;GOOS=windows
+```
