@@ -18,6 +18,8 @@ kroute
 
 ```
 CGO_ENABLED=0;GOOS=linux
-
+or
 CGO_ENABLED=0;GOOS=windows
+
+go build main.go -o bin/kroute
 ```
