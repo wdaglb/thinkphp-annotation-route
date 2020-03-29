@@ -22,7 +22,7 @@ func RmfileRoute(file string)  {
 		return
 	}
 	var arr []Route
-	println("删除文件路由：", file)
+	// println("删除文件路由：", file)
 	for _, f := range routes {
 		// println("文件路由：", f.FileSrc, file)
 		if f.FileSrc != file {
