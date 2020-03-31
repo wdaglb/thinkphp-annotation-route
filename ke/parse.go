@@ -104,7 +104,11 @@ func getMethodName(str string) string {
 	if reg == nil {
 		return ""
 	}
-	return reg.FindStringSubmatch(str)[1]
+	match := reg.FindStringSubmatch(str)
+	if len(match) == 0 {
+		return ""
+	}
+	return match[1]
 }
 
 // 解出控制器名

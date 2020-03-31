@@ -41,17 +41,17 @@ func DelFile(src string)  {
 
 // 获取所有文件
 func GetAllFile(pathname string, s []string) ([]string, error) {
-	if len(files) > 0 {
-		arr := make([]string, len(files) + len(acts))
-		for _, v := range files {
-			arr = append(arr, v)
-		}
-		for _, v := range acts {
-			arr = append(arr, v)
-		}
-		acts = acts[0:0]
-		return arr, nil
-	}
+	//if len(files) > 0 {
+	//	arr := make([]string, len(files) + len(acts))
+	//	for _, v := range files {
+	//		arr = append(arr, v)
+	//	}
+	//	for _, v := range acts {
+	//		arr = append(arr, v)
+	//	}
+	//	acts = acts[0:0]
+	//	return arr, nil
+	//}
 	rd, err := ioutil.ReadDir(pathname)
 	if err != nil {
 		fmt.Println("read dir fail:", err)

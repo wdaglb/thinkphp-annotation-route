@@ -25,6 +25,7 @@ func Write(sendfile string)  {
 	for _, file := range files {
 		file = strings.ReplaceAll(file, "\\", "/")
 		ParseFile(strings.ReplaceAll(file, rootPath + appPath, ""))
+		// println(file)
 		if file != "" {
 			fmt.Println(file + " ok!")
 		}
