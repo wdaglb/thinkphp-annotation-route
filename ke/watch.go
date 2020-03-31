@@ -41,7 +41,7 @@ func (w *Watch) watchDir(dir string) {
 						fi, err := os.Stat(ev.Name)
 						if err == nil && fi.IsDir() {
 							w.watch.Add(ev.Name)
-							fmt.Println("添加监控 : ", ev.Name)
+							// fmt.Println("添加监控 : ", ev.Name)
 						}
 					} else if ev.Op&fsnotify.Write == fsnotify.Write {
 						//fmt.Println("写入文件 : ", ev.Name)
@@ -52,12 +52,12 @@ func (w *Watch) watchDir(dir string) {
 						fi, err := os.Stat(ev.Name)
 						if err == nil && fi.IsDir() {
 							w.watch.Remove(ev.Name)
-							fmt.Println("删除监控 : ", ev.Name)
+							// fmt.Println("删除监控 : ", ev.Name)
 						} else {
 							DelFile(ev.Name)
 						}
 					} else if ev.Op&fsnotify.Rename == fsnotify.Rename {
-						fmt.Println("重命名文件 : ", ev.Name)
+						// fmt.Println("重命名文件 : ", ev.Name)
 						//如果重命名文件是目录，则移除监控
 						//注意这里无法使用os.Stat来判断是否是目录了
 						//因为重命名后，go已经无法找到原文件来获取信息了
