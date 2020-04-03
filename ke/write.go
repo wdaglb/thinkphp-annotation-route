@@ -22,12 +22,12 @@ func Write(sendfile string)  {
 	}
 
 	// println(ke.GetConfig("root_path") + ke.GetConfig("app_path"))
-	for _, file := range files {
-		file = strings.ReplaceAll(file, "\\", "/")
-		ParseFile(strings.ReplaceAll(file, rootPath + appPath, ""))
+	for _, fil := range files {
+		fil = strings.ReplaceAll(fil, "\\", "/")
+		ParseFile(strings.ReplaceAll(fil, rootPath + appPath, ""))
 		// println(file)
-		if file != "" {
-			fmt.Println(file + " ok!")
+		if fil != "" {
+			fmt.Println(fil + " ok!")
 		}
 	}
 
@@ -57,6 +57,8 @@ func Update()  {
 func save()  {
 	var data []string
 
+	println("save: ", file)
+
 	data = append(data, "<?php\r\n/* build_route提示：本文件为自动生成，请不要编辑 */\r\n")
 	for _, item := range GetAllRoute() {
 		if item.RouteMethod == "" {
@@ -67,12 +69,13 @@ func save()  {
 			item.RouteUri,
 			item.RouteHandler))
 	}
-	fs, err := os.OpenFile(file, os.O_CREATE|os.O_TRUNC, 0644)
+	fs, err := os.OpenFile(file, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0644)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 	defer fs.Close()
+	// fmt.Printf("%+v", data)
 	n, err := fs.Write([]byte(strings.Join(data, "\r\n")))
 	if err == nil && n < len(data) {
 		fmt.Println(err.Error())
