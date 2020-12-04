@@ -2,9 +2,8 @@ package ke
 
 import (
 	"flag"
-	"log"
+	"fmt"
 	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -12,7 +11,7 @@ var (
 	data = map[string]string{}
 )
 
-func SetConfig(key string, value string)  {
+func SetConfig(key string, value string) {
 	data[key] = value
 }
 
@@ -25,12 +24,15 @@ func GetAllConfig() map[string]string {
 }
 
 func init() {
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+	//dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	//if err != nil {
+	//	log.Fatal(err.Error())
+	//}
 
-	rootPath := flag.String("root", dir + "/", "root_path")
+	rootPath, _ := os.Getwd()
+
+	fmt.Println(rootPath)
+	// rootPath := flag.String("root", dir + "/", "root_path")
 	appPath := flag.String("app", "application", "app_path")
 	routeFile := flag.String("route", "./route/build_route.php", "route")
 	isWatch := flag.Bool("watch", false, "watch")
@@ -38,7 +40,7 @@ func init() {
 	flag.Parse()
 	// println(*rootPath, *appPath, *isWatch)
 	// 设置根目录
-	SetConfig("root_path", strings.ReplaceAll(*rootPath, "\\", "/"))
+	SetConfig("root_path", strings.ReplaceAll(rootPath, "\\", "/")+"/")
 	// 设置应用目录名
 	SetConfig("app_path", *appPath)
 	// 设置控制器后缀
