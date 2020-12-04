@@ -86,16 +86,32 @@ func setRouteInfo(str string, route *Route)  {
 
 	// fmt.Println("t", temps[1])
 
-	module := temps[1]
-	controller := getControllerName(temps[len(temps) - 1])
-	temps = temps[:len(temps)-1]
-	temps = temps[3:]
+	var (
+		module string
+		controller string
+	)
 
-	if len(temps) > 0 {
-		controller = strings.Join(temps, ".") + "." + controller
+	if temps[1] == "controller" {
+		module = ""
+		controller = getControllerName(temps[len(temps) - 1])
+		temps = temps[:len(temps)-1]
+		temps = temps[2:]
+		if len(temps) > 0 {
+			controller = strings.Join(temps, ".") + "." + controller
+		}
+		route.RouteHandler = fmt.Sprintf("%s/%s", controller, route.MethodName)
+	} else {
+		module = temps[1]
+		controller = getControllerName(temps[len(temps) - 1])
+		temps = temps[:len(temps)-1]
+		temps = temps[3:]
+		if len(temps) > 0 {
+			controller = strings.Join(temps, ".") + "." + controller
+		}
+		route.RouteHandler = fmt.Sprintf("%s/%s/%s", module, controller, route.MethodName)
 	}
 
-	route.RouteHandler = fmt.Sprintf("%s/%s/%s", module, controller, route.MethodName)
+
 }
 
 // 获取方法名
